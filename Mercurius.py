@@ -41,7 +41,7 @@ class Chat:
 		
 		#Socket Created
 		self.s.bind(('127.0.0.1', self.port))
-		self.s.listen(5)
+		self.s.listen(10)
 		
 	def broadcast(self, msg, color):
 		
@@ -110,9 +110,9 @@ class Chat:
 			threading.Thread(target=self.recv_data, args=(con, end, color)).start()
 			
 	############CLIENT######################
-	def client_socket(self):
+	def client_socket(self, addres='127.0.0.1'):
 		#Connects to Server
-		self.s.connect(('127.0.0.1', self.port))
+		self.s.connect((addres, self.port))
 			
 	def get_input(self):
 		
@@ -154,7 +154,7 @@ if args[1] == "server":
 
 #CLIENT
 else:
-	s.client_socket()
+	s.client_socket(args[3])
 	threading.Thread(target=s.get_input).start()
 	threading.Thread(target=s.get_response).start()
 	
