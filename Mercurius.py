@@ -154,7 +154,10 @@ if args[1] == "server":
 
 #CLIENT
 else:
-	s.client_socket(args[3])
+	try:
+		s.client_socket(args[3])
+	except:
+		s.client_socket()
 	threading.Thread(target=s.get_input).start()
 	threading.Thread(target=s.get_response).start()
 	
